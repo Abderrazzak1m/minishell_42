@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 20:38:52 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/09/25 16:26:37 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/09/27 01:15:05 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 #define S_QUOT '\''
 #define D_QUOT '"'
 #define SC_S "%'()*+,-./:\^`|~$"
-#define SC  " \t\n!\"%'()*+,-./:;<=>?@[]^`|~$"
+#define SC  " \t\n!\"%'()*+,-./\\:;<=>?@[]^`|$"
 #define NOTWORD " \t\r\n\"'\v\f|<>$/"
 # define WSPACE -1           // ' '
 # define PIPE -2             // |
@@ -94,11 +94,17 @@ t_token *new_token(char *val, int type);
 void clean_tokens(t_token **tokens);
 
 //enverment
+void get_env();
+void ft_ev(void);
 int append_env(t_env **env, t_env *newenv);
 t_env *new_env(char *variable, char *value);
 void set_env(char **envr);
 int check_error_syntax(t_token *token);
 char *get_value_of_env(char *value);
+int check_env_value(char *var);
+void new_value_in_env(char *str, int type);
+void update_exit_value_env(char *var, char *value);
+
 void  expand_data(t_token *token);
 
 //redirection
@@ -114,4 +120,10 @@ int parser(t_cmd **cmd, t_token *tokens);
 
 // ecex
 void ft_exuc_command(t_cmd *cmd, t_token *token, char **env);
+
+//builtin
+char    *ft_cwd();
+void	ft_pwd(char **cmnd);
+void ft_export(char **cmnd);
+void ft_cd(char **cmd);
 #endif

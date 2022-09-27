@@ -182,7 +182,7 @@ void lexer(char *line, t_token **tokens)
     while(line[i])
     {
         i += check_ws(&line[i], tokens);
-        i += is_word(&line[i],tokens, " \t\r\n\"'\v\f|<>$/");
+        i += is_word(&line[i],tokens, " \t\r\n\"'\v\f|<>$");
         i += is_red(&line[i], tokens);
         i += is_pipe(&line[i], tokens);
         i += is_squot(&line[i], tokens);
