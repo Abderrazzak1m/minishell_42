@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amiski <amiski@student.42.fr>              +#+  +:+       +#+         #
+#    By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 12:34:42 by amiski            #+#    #+#              #
-#    Updated: 2022/09/24 10:53:01 by amiski           ###   ########.fr        #
+#    Updated: 2022/09/28 11:50:36 by yoelhaim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS = ft_bzero.c\
 	   ft_putendl_fd.c\
 	   ft_strmapi.c\
 	   ft_striteri.c\
+	   ft_strcmp.c\
 
 BONUS = ft_lstnew.c \
 	    ft_lstsize.c \

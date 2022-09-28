@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 20:38:52 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/09/27 01:15:05 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/09/28 12:54:11 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 # include <termios.h>
 # include <fcntl.h>
 # include <sys/types.h>
+# include <dirent.h>
+# include <errno.h>
+# include <stdbool.h>
+# include <limits.h>
 # include <sys/stat.h>
 # include <unistd.h>
 # include "../libft/libft.h"
@@ -52,6 +56,10 @@ typedef struct s_globals
 	t_env		*g_env;
 	int			status_sign;
 	int			shlvl;
+    int         dup_out;
+    int         dup_in;
+    int         w_out;
+    int         r_in;
 }	t_globals;
 
 extern t_globals	g_tools;
@@ -109,8 +117,12 @@ void  expand_data(t_token *token);
 
 //redirection
 t_red *new_red(int type, char *f_name);
-int append_red(t_red **reds, t_red *newred);
-void clean_reds(t_red **reds);
+int     append_red(t_red **reds, t_red *newred);
+void    clean_reds(t_red **reds);
+void ft_open_herdoc(t_token *token);
+//in out red
+void ft_red_in(char *namefile);
+void ft_red_out(char *namefile);
 
 //command
 int append_cmnd(t_cmd **cmds, t_cmd *newcmd);
@@ -126,4 +138,10 @@ char    *ft_cwd();
 void	ft_pwd(char **cmnd);
 void ft_export(char **cmnd);
 void ft_cd(char **cmd);
+void ft_unset(char **cmd);
+void ft_exit(char **value_exit);
+void ft_echo(char **cmd);
+
+
+
 #endif

@@ -2,6 +2,7 @@
 
 void    ft_readline(char **line)
 {
+    signal(SIGQUIT, SIG_IGN);
     *line = readline("miniShell> ");
     if(!(*line))
     {

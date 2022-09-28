@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 20:43:26 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/09/26 22:30:26 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/09/28 11:34:32 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int main(int ac, char **av, char **envr)
             clean_tokens(&tokens);
             continue;
         }
+        ft_open_herdoc(tokens);
         expand_data(tokens);
         parser(&cmd, tokens);
         ft_exuc_command(cmd, tokens, envr);

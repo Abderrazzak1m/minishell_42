@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:41:26 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/09/27 16:26:56 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/09/27 21:54:11 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,33 @@
 
 void ft_switch()
 {
-	static int status;
+	char *old;
+	char *new;
 	if(check_env_value("OLDPWD"))
 	{
 		perror ("OLDPWD NOT SET");
 		return ;
 	}
-	
-	if (status == 0)
-	{
-		if(check_env_value("OLDPWD"))
-			new_value_in_env(ft_strjoin("OLDPWD=", ft_cwd()), 0);
-		else
-			update_exit_value_env("OLDPWD",ft_cwd());
-		status = 1;
-	}
 	else
-	{
-		status = 0;
-	}
+		new = get_value_of_env("OLDPWD");
+	if (!check_env_value("PWD"))
+		old = get_value_of_env("PWD");
+	else
+		old = ft_cwd(); 
+	ft_unset(ft_split("OLDPWD", ' '));
+	ft_unset(ft_split("PWD", ' '));
+	new_value_in_env(ft_strjoin("OLDPWD=", old), 0);
+	new_value_in_env(ft_strjoin("PWD=", new), 0);
+	chdir(new);
+	printf("%s\n", new);
+		
 }
 void ft_update_pwd(char *old)
 {
-	if(check_env_value("OLDPWD"))
-			new_value_in_env(ft_strjoin("OLDPWD=", old), 0);
-	else
-		update_exit_value_env("OLDPWD", ft_strjoin("OLDPWD=", old));
-	if(check_env_value("PWD"))
-		new_value_in_env(ft_strjoin("PWD=", ft_cwd()), 0);
-	else
-		update_exit_value_env("PWD", ft_strjoin("PWD=", ft_cwd()));
-	
+	ft_unset(ft_split("PWD", ' '));
+	ft_unset(ft_split("OLDPWD", ' '));
+	new_value_in_env(ft_strjoin("OLDPWD=", old), 0);
+	new_value_in_env(ft_strjoin("PWD=", ft_cwd()), 0);
 }
 
 void ft_cd(char **cmd)
@@ -69,7 +65,8 @@ void ft_cd(char **cmd)
 			ft_switch();
 		else
 		{
-			chdir(ft_cwd());
+			if (chdir(*cmd) == -1)
+				perror("");
 			ft_update_pwd(old);
 		}
 	}
