@@ -41,13 +41,15 @@ int is_sign(char *line, t_token **tokens)
             append(tokens, new_token(ft_memcpy(buff,&line[i - 1], 2), WORD));
             return(2);
         }
-        
+        else if(line[i] == '\'')
+            return(1);
         else
         {
             while (!ft_strchr(SC, line[i]))
                 i++;
             buff = malloc(sizeof(char) * i + 1);
             ft_strlcpy(buff, line + 1, i);
+            printf("%s\n", buff);
             append(tokens, new_token(buff, SIGN));
             return(i);
         }
@@ -185,8 +187,8 @@ void lexer(char *line, t_token **tokens)
         i += is_word(&line[i],tokens, " \t\r\n\"'\v\f|<>$");
         i += is_red(&line[i], tokens);
         i += is_pipe(&line[i], tokens);
-        i += is_squot(&line[i], tokens);
         i += is_sign(&line[i], tokens);
+        i += is_squot(&line[i], tokens);
         i += is_dquot(&line[i], tokens);
         //sleep(2);
     }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_herdoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:32:39 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/09/28 12:28:51 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/02 18:34:53 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	opning_line(char **value, int *type)
 	static int id;
 	char  *filename;
 	
+    printf("%s\n", *value);
 	buff = ft_strdup("");
 	while (1)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 20:38:52 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/09/28 12:54:11 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/02 19:42:01 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,15 @@
 # include <termios.h>
 # include <fcntl.h>
 # include <sys/types.h>
-# include <dirent.h>
-# include <errno.h>
-# include <stdbool.h>
-# include <limits.h>
 # include <sys/stat.h>
+# include <dirent.h>
 # include <unistd.h>
 # include "../libft/libft.h"
 //colors
 #define S_QUOT '\''
 #define D_QUOT '"'
 #define SC_S "%'()*+,-./:\^`|~$"
-#define SC  " \t\n!\"%'()*+,-./\\:;<=>?@[]^`|$"
+#define SC  " \t\n!%()*\"'+,-./\\:;<=>?@[]^`|$"
 #define NOTWORD " \t\r\n\"'\v\f|<>$/"
 # define WSPACE -1           // ' '
 # define PIPE -2             // |
@@ -56,10 +53,6 @@ typedef struct s_globals
 	t_env		*g_env;
 	int			status_sign;
 	int			shlvl;
-    int         dup_out;
-    int         dup_in;
-    int         w_out;
-    int         r_in;
 }	t_globals;
 
 extern t_globals	g_tools;
@@ -82,7 +75,8 @@ typedef struct s_red
 
 typedef struct s_cmd
 {
-    char **cmnd;   
+    char **cmnd;
+    int pipe[2];
     struct s_red *red;
     struct s_cmd *next;
     struct s_cmd *prev;
@@ -117,12 +111,8 @@ void  expand_data(t_token *token);
 
 //redirection
 t_red *new_red(int type, char *f_name);
-int     append_red(t_red **reds, t_red *newred);
-void    clean_reds(t_red **reds);
-void ft_open_herdoc(t_token *token);
-//in out red
-void ft_red_in(char *namefile);
-void ft_red_out(char *namefile);
+int append_red(t_red **reds, t_red *newred);
+void clean_reds(t_red **reds);
 
 //command
 int append_cmnd(t_cmd **cmds, t_cmd *newcmd);
@@ -131,7 +121,9 @@ t_cmd *new_cmnd(t_red *red, char **cmnd);
 int parser(t_cmd **cmd, t_token *tokens);
 
 // ecex
-void ft_exuc_command(t_cmd *cmd, t_token *token, char **env);
+void ft_exuc_command(t_cmd *cmd, t_token *token, t_env *env, char **envr);
+int reset_io(t_cmd *cmd);
+void ft_open_herdoc(t_token *tokens);
 
 //builtin
 char    *ft_cwd();
@@ -141,7 +133,4 @@ void ft_cd(char **cmd);
 void ft_unset(char **cmd);
 void ft_exit(char **value_exit);
 void ft_echo(char **cmd);
-
-
-
 #endif

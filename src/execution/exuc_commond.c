@@ -1,16 +1,41 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exuc_commond.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/28 12:32:34 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/09/28 13:04:00 by yoelhaim         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../include/minishell.h"
+
+
+char **get_path(t_env *env)
+{
+	char **path;
+	
+	while(env)
+	{
+		if(ft_strncmp("PATH", env->variable, 4) == 0)
+		{
+			path = ft_split(env->value+5, ':');
+			return(path);
+		}
+		env = env->next;
+	}
+	return(NULL);
+}
+
+int is_executable(char **path, t_cmd *cmd, char **env)
+{
+	char *str;
+	str = ft_strjoin("/", cmd->cmnd[0]);
+	while(*path)
+	{
+		if(access(ft_strjoin(*path, str), F_OK | X_OK) == 0)
+		{
+			if (cmd->prev)
+				close(cmd->prev->pipe[1]);
+			if (cmd->next)
+				close(cmd->pipe[0]);
+			execve(ft_strjoin(*path, str),cmd->cmnd, env);
+			return(1);
+		}
+		path++;
+	}
+	return(0);
+}
 
 int ft_check_is_builtin(char **cmnd)
 {
@@ -31,46 +56,44 @@ int ft_check_is_builtin(char **cmnd)
 	return (0);
 }
 
-int	ft_check_red(t_red *red)
+void run_cmd(t_cmd *cmd, t_env *env, char **envr)
 {
-	t_red *file;
-
-	file = red;
-	while (file)
-	{
-		if (file->type == REDOUT)
-			ft_red_out(file->f_name);
-		file = file->next;
+	char **path;
+	int pid = fork();
+	if(pid == 0)
+	{	
+		path = get_path(env);
+		if(!ft_check_is_builtin(cmd->cmnd))
+		{
+		if(!is_executable(path, cmd, envr))
+			printf("command not fond\n");
+		}
+		return ;
 	}
-	return (1);
-}
-
-void ft_exuc_command(t_cmd *cmd, t_token *token, char **env)
-{
-	(void) token;
-	t_cmd *tmp;
-	(void) env;
-	tmp = cmd;
 	
-	while (tmp)
+}
+void ft_exuc_command(t_cmd *cmd, t_token *token, t_env *env, char **envr)
+{
+	(void)token;
+	int fd[2] ;
+
+    fd[1] = dup(1);
+    fd[0] = dup(0);
+	while(cmd)
 	{
-		g_tools.dup_out = dup(1);
-		if (tmp->red != NULL)
+		if(reset_io(cmd))
 		{
-			g_tools.dup_out = dup(0);
-			ft_check_red(tmp->red);
+			run_cmd(cmd,env, envr);
+			dup2(fd[1], 1);
+			dup2(fd[0], 0);
 		}
-		if (tmp->red == NULL)
-		{
-			if(!ft_check_is_builtin(tmp->cmnd))
-				printf("is commond systeme\n");
-		}
-		dup2(g_tools.dup_out, 1);
-		close(g_tools.dup_out);
-		// dup2(g_tools.dup_in, 0);
-		// dup2(g_tools.dup_out, 1);
-		// close(g_tools.dup_out);
-		// close(g_tools.dup_in);
-		tmp = tmp->next;
+		cmd = cmd->next;
+	}
+	close(fd[1]);
+	close(fd[0]);
+	while(1)
+	{
+		if (waitpid(-1, NULL, 0) == -1)
+			break;
 	}
 }
