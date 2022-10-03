@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_herdoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:32:39 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/02 18:34:53 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/03 16:59:39 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	opning_line(char **value, int *type)
 	static int id;
 	char  *filename;
 	
-    printf("%s\n", *value);
+    // printf("%s\n", *value);
 	buff = ft_strdup("");
 	while (1)
 	{
@@ -66,11 +66,34 @@ void	opning_line(char **value, int *type)
 	close(fd);
 }
 
-void edit_signs(char **value, int type)
+void edit_signs(char **value, int type, t_token *token)
 {
+	t_token *tmp;
+	char *buff;
+	
+	tmp = token;
+	buff = "";
 	if (type == SIGN)
-		*value = ft_strjoin("$", *value);
-
+	{
+		while (tmp)
+		{
+			if (tmp->type == HEREDOC)
+			{
+				tmp = tmp->next;
+				if (tmp->type == WSPACE)
+					tmp = tmp->next;
+				while (tmp->type != WSPACE)
+				{
+					buff = ft_strjoin(buff, ft_strjoin("$", tmp->val));
+					if (tmp->next == NULL)
+						break ;
+					tmp = tmp->next;
+				}	
+			}
+			tmp = tmp->next;
+		}
+		*value = buff;
+	}
 }
 
 void ft_open_herdoc(t_token *token)
@@ -81,13 +104,13 @@ void ft_open_herdoc(t_token *token)
 		{
 			if (token->next->type == WSPACE && token->next != NULL)
 			{
-				edit_signs(&token->next->next->val,token->next->next->type);
+				edit_signs(&token->next->next->val,token->next->next->type, token);
 				opning_line(&token->next->next->val, &token->next->next->type);
 			}
 				
 			else
 			{
-				edit_signs(&token->next->val, token->next->type);
+				edit_signs(&token->next->val, token->next->type, token);
 				opning_line(&token->next->val, &token->next->type);
 			}
 		}
