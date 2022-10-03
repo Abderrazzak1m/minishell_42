@@ -49,7 +49,7 @@ int is_sign(char *line, t_token **tokens)
                 i++;
             buff = malloc(sizeof(char) * i + 1);
             ft_strlcpy(buff, line + 1, i);
-            printf("%s\n", buff);
+            // printf("%s\n", buff);
             append(tokens, new_token(buff, SIGN));
             return(i);
         }
