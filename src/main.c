@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 20:43:26 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/02 19:37:36 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/03 16:39:57 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,13 @@ int main(int ac, char **av, char **envr)
         //     cmd = cmd->next;
         // }
 
-        while(tokens)
-        {
-            puts("--------------------------");
-            printf("---value  => %s \n---type  ..=> %d\n",tokens->val, tokens->type);
-            puts("-------------------------");
-            tokens = tokens->next;
-        } 
+        // while(tokens)
+        // {
+        //     puts("--------------------------");
+        //     printf("---value  => %s \n---type  ..=> %d\n",tokens->val, tokens->type);
+        //     puts("-------------------------");
+        //     tokens = tokens->next;
+        // } 
         clean_cmnds(&cmd);
         clean_tokens(&tokens);
     }
