@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 23:42:25 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/04 15:45:22 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:04:54 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 	else if (*set_value[0] == '0')
 		*set_value = "minishell";
 	else if (*set_value[0] >= '1' && *set_value[0] <= '9')
-		*set_value = "\n\0";
+		*set_value = "\0";
 	else
 		*set_value = "\0";
 	return (0);
