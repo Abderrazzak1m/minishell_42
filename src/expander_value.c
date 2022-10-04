@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 23:42:25 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/04 13:39:32 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/04 15:45:22 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void  expand_data(t_token *token)
 		{
 			if (tmp->val[0] == '~' && tmp->val[1] == '\0')
 				tmp->val = ft_strdup(getenv("HOME"));
-			if (tmp->val[0] == '~' && tmp->val[1] == '/' && tmp->val[2] == '/0')
+			if (tmp->val[0] == '~' && tmp->val[1] == '/' && tmp->val[2] == '\0')
 				tmp->val = ft_strdup(ft_strjoin(getenv("HOME"), "/"));
 			if (tmp->val[0] == '*' && tmp->val[1] == '\0')
 				ft_wildcard(&tmp->val);

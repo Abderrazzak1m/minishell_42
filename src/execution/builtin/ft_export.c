@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:14:41 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/03 20:37:40 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/04 15:47:30 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int check_env_value(char *var)
 	env = g_tools.g_env;
 	while (env)
 	{
-		if (!ft_strncmp(var, env->variable, ft_strlen(var) + 1))
+		if (!ft_strcmp(var, env->variable))
 			return (0);
 		env = env->next;
 	}
