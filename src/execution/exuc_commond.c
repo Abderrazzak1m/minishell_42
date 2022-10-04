@@ -56,10 +56,12 @@ int ft_check_is_builtin(char **cmnd)
 	return (0);
 }
 
-void run_cmd(t_cmd *cmd, t_env *env, char **envr)
+int  run_cmd(t_cmd *cmd, t_env *env, char **envr)
 {
 	char **path;
 	int pid = fork();
+	if (pid < 0)
+		return (0);
 	if(pid == 0)
 	{	
 		path = get_path(env);
@@ -68,9 +70,9 @@ void run_cmd(t_cmd *cmd, t_env *env, char **envr)
 		if(!is_executable(path, cmd, envr))
 			printf("command not fond\n");
 		}
-		return ;
+		return (1);
 	}
-	
+	return (1);
 }
 void ft_exuc_command(t_cmd *cmd, t_token *token, t_env *env, char **envr)
 {
@@ -83,7 +85,12 @@ void ft_exuc_command(t_cmd *cmd, t_token *token, t_env *env, char **envr)
 	{
 		if(reset_io(cmd))
 		{
-			run_cmd(cmd,env, envr);
+			if (run_cmd(cmd,env, envr) == 0)
+			{
+				perror("bash ");
+				break ;
+			}
+				
 			dup2(fd[1], 1);
 			dup2(fd[0], 0);
 		}
