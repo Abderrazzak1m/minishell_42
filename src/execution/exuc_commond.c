@@ -88,6 +88,8 @@ void ft_exuc_command(t_cmd *cmd, t_token *token, t_env *env, char **envr)
 			if (run_cmd(cmd,env, envr) == 0)
 			{
 				perror("bash ");
+				dup2(fd[1], 1);
+				dup2(fd[0], 0);
 				break ;
 			}
 				
