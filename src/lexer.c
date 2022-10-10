@@ -24,7 +24,13 @@ int is_sign(char *line, t_token **tokens)
     if(line[i] == '$')
     {
     
-        if(ft_isdigit(line[++i]))
+        if(ft_strchr(SC_S, line[++i]))
+        {
+            buff = malloc(sizeof(char)*2);
+            append(tokens, new_token("$", SIGN));
+            return(1);
+        }
+        if(ft_isdigit(line[i]))
         {  
             buff = malloc(sizeof(char)*2);
             append(tokens, new_token(ft_memcpy(buff,&line[i], 1), SIGN));

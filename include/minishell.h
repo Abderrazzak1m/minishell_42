@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 20:38:52 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/04 16:49:28 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/07 23:04:03 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 //colors
 #define S_QUOT '\''
 #define D_QUOT '"'
-#define SC_S "%'()*+,-./:\^`|~$"
-#define SC  " \t\n!%()*\"'+,-./\\:;<=>?@[]^`|$"
+#define SC_S "\"'"
+#define SC  " \t\n!%()*\"'+,-./\\:;<=>?@[]~^`|$"
 #define NOTWORD " \t\r\n\"'\v\f|<>$/"
 # define WSPACE -1           // ' '
 # define PIPE -2             // |
