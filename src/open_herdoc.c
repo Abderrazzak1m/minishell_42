@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_herdoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:32:39 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/10 19:46:47 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/10 20:34:39 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	opning_line(char **value, int *type)
 	static int id;
 	char  *filename;
 	
-    // printf("%s\n", *value);
+    printf("%s\n", *value);
 	buff = ft_strdup("");
 	while (1)
 	{
@@ -73,7 +73,7 @@ void edit_signs(char **value, int type, t_token *token)
 	
 	tmp = token;
 	buff = "";
-	if (type == SIGN)
+	if (type == SIGN || type == WORD || type == EXIT_STATUS)
 	{
 		while (tmp)
 		{
@@ -84,7 +84,12 @@ void edit_signs(char **value, int type, t_token *token)
 					tmp = tmp->next;
 				while (tmp->type != WSPACE)
 				{
-					buff = ft_strjoin(buff, ft_strjoin("$", tmp->val));
+					if (tmp->type == WORD)
+					{
+						buff = ft_strjoin(buff, ft_strjoin("", tmp->val));
+					}
+					else if (tmp->type == SIGN || tmp->type == EXIT_STATUS)
+						buff = ft_strjoin(buff, ft_strjoin("$", tmp->val));
 					if (tmp->next == NULL)
 						break ;
 					tmp = tmp->next;

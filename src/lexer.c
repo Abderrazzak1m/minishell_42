@@ -26,8 +26,8 @@ int is_sign(char *line, t_token **tokens)
     
         if(ft_strchr(SC_S, line[++i]))
         {
-            buff = malloc(sizeof(char)*2);
-            append(tokens, new_token("$", SIGN));
+            //buff = malloc(sizeof(char)*2);
+            //append(tokens, new_token("$", SIGN));
             return(1);
         }
         if(ft_isdigit(line[i]))

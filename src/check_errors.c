@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:56:16 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/09/24 23:26:38 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/10 20:27:20 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ size_t check_error_rederection(t_token *token)
 			token = token->next;
 			if (token->type == WSPACE && token->next != NULL)
 				token = token->next;
-			if (token->type != WORD && token->type != SIGN)
+			if (token->type != WORD && token->type != SIGN && token->type != EXIT_STATUS)
 				return (ft_putstr_fd("error syntax redirection\n", 2),404);
 		}
 		token = token->next;
