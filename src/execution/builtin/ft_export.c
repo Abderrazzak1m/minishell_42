@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:14:41 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/04 15:47:30 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/11 13:00:28 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void new_value_in_env(char *str, int type)
 	char *tmp;
 	char *var;
 
-	tmp = ft_split(str, '=')[1];
+	tmp = ft_strstr(str, "=") + 1;
 	var = ft_split(str, '=')[0];
 	if (type == 1)
 	{

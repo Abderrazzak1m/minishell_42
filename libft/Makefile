@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amiski <amiski@student.42.fr>              +#+  +:+       +#+         #
+#    By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 12:34:42 by amiski            #+#    #+#              #
-#    Updated: 2022/10/02 16:25:47 by amiski           ###   ########.fr        #
+#    Updated: 2022/10/11 12:58:39 by yoelhaim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ INCLUD = libft.h
 
 SRCS = ft_bzero.c\
 	   ft_split.c\
+	   ft_strstr.c\
 	   ft_atoi.c\
 	   ft_calloc.c\
 	   ft_isalnum.c\

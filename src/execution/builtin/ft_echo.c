@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 21:55:16 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/02 16:27:14 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/11 13:17:42 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int check_is_n(char *str)
 	i = 1;
 	if (*str == '-')
 	{
+		if (!str[i])
+			return (1);
 		while (str[i])
 		{
 			if (str[i++] != 'n')

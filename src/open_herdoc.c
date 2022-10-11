@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:32:39 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/10 20:34:39 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:10:36 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	opning_line(char **value, int *type)
 	char  *filename;
 	
     printf("%s\n", *value);
+	 printf("%d\n", *type);
 	buff = ft_strdup("");
 	while (1)
 	{
@@ -75,31 +76,26 @@ void edit_signs(char **value, int type, t_token *token)
 	buff = "";
 	if (type == SIGN || type == WORD || type == EXIT_STATUS)
 	{
-		while (tmp)
-		{
-			if (tmp->type == HEREDOC)
-			{
-				tmp = tmp->next;
-				if (tmp->type == WSPACE)
-					tmp = tmp->next;
 				while (tmp->type != WSPACE)
 				{
 					if (tmp->type == WORD)
-					{
 						buff = ft_strjoin(buff, ft_strjoin("", tmp->val));
-					}
 					else if (tmp->type == SIGN || tmp->type == EXIT_STATUS)
 						buff = ft_strjoin(buff, ft_strjoin("$", tmp->val));
+					if( tmp->next && tmp->next->type != WSPACE)
+					{
+						tmp->next->val = "\t";
+						tmp->next->type = WSPACE;
+						
+					}
 					if (tmp->next == NULL)
 						break ;
 					tmp = tmp->next;
 				}	
-			}
-			tmp = tmp->next;
-		}
 		*value = buff;
 	}
 }
+
 
 void ft_open_herdoc(t_token *token)
 {
@@ -109,13 +105,13 @@ void ft_open_herdoc(t_token *token)
 		{
 			if (token->next->type == WSPACE && token->next != NULL)
 			{
-				edit_signs(&token->next->next->val,token->next->next->type, token);
+				edit_signs(&token->next->next->val,token->next->next->type, token->next->next);
 				opning_line(&token->next->next->val, &token->next->next->type);
 			}
 				
 			else
 			{
-				edit_signs(&token->next->val, token->next->type, token);
+				edit_signs(&token->next->val, token->next->type, token->next);
 				opning_line(&token->next->val, &token->next->type);
 			}
 		}
