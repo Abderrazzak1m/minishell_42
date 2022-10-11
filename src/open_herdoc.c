@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:32:39 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/11 14:10:36 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/11 16:34:41 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ void	opning_line(char **value, int *type)
 	static int id;
 	char  *filename;
 	
-    printf("%s\n", *value);
-	 printf("%d\n", *type);
 	buff = ft_strdup("");
 	while (1)
 	{
@@ -60,6 +58,7 @@ void	opning_line(char **value, int *type)
 		buff = ft_strjoin(buff, ft_strjoin(line, "\n"));
 	}
 	filename = get_filename(ft_strjoin("/tmp/.fileherdooc", ft_itoa(id++)));
+	
 	*value = filename;
 	fd = open (*value, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	*type = WORD;
@@ -67,13 +66,15 @@ void	opning_line(char **value, int *type)
 	close(fd);
 }
 
+
 void edit_signs(char **value, int type, t_token *token)
 {
 	t_token *tmp;
+	tmp = token;
+
 	char *buff;
 	
-	tmp = token;
-	buff = "";
+	buff = ft_strdup("");
 	if (type == SIGN || type == WORD || type == EXIT_STATUS)
 	{
 				while (tmp->type != WSPACE)
@@ -86,10 +87,9 @@ void edit_signs(char **value, int type, t_token *token)
 					{
 						tmp->next->val = "\t";
 						tmp->next->type = WSPACE;
-						
 					}
 					if (tmp->next == NULL)
-						break ;
+						break;	
 					tmp = tmp->next;
 				}	
 		*value = buff;

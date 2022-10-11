@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:56:16 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/11 13:51:44 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/11 16:19:08 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ size_t check_error_pipe(t_token *token)
 		return (ft_putstr_fd("syntax error '|'\n", 2), 404);
 	while (token)
 	{
-		ft_open_herdoc(token);
+		// ft_open_herdoc(token);
 		if (token->type == PIPE && token->next != NULL)
 		{
 			token = token->next;
@@ -61,6 +61,7 @@ size_t check_error_rederection(t_token *token)
 	}
 	return (1);
 }
+
 int check_error_syntax(t_token *token)
 {
 	t_token *cmd;

@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 20:43:26 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/11 13:51:17 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/11 16:19:14 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,12 @@ int main(int ac, char **av, char **envr)
             clean_tokens(&tokens);
             continue;
         }
-        // ft_open_herdoc(tokens);
-        expand_data(tokens);
-        parser(&cmd, tokens);
-        ft_exuc_command(cmd, tokens, g_tools.g_env, envr);
+
+        //continue;
+        ft_open_herdoc(tokens);
+        // expand_data(tokens);
+        // parser(&cmd, tokens);
+        // ft_exuc_command(cmd, tokens, g_tools.g_env, envr);
         // while (1);
         
        
@@ -91,13 +93,13 @@ int main(int ac, char **av, char **envr)
         //     cmd = cmd->next;
         // }
 
-        // while(tokens)
-        // {
-        //     puts("--------------------------");
-        //     printf("---value  => %s \n---type  ..=> %d\n",tokens->val, tokens->type);
-        //     puts("-------------------------");
-        //     tokens = tokens->next;
-        // } 
+        /*while(tokens)
+        {
+            puts("--------------------------");
+            printf("---value  => %s \n---type  ..=> %d\n",tokens->val, tokens->type);
+            puts("-------------------------");
+            tokens = tokens->next;
+        } */
         clean_cmnds(&cmd);
         clean_tokens(&tokens);
     }
