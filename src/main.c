@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 20:43:26 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/11 16:19:14 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/12 13:21:52 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ int main(int ac, char **av, char **envr)
 
         //continue;
         ft_open_herdoc(tokens);
-        // expand_data(tokens);
-        // parser(&cmd, tokens);
-        // ft_exuc_command(cmd, tokens, g_tools.g_env, envr);
+        expand_data(tokens);
+        parser(&cmd, tokens);
+        ft_exuc_command(cmd, tokens, g_tools.g_env, envr);
         // while (1);
         
        

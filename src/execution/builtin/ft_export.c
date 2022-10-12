@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:14:41 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/11 13:00:28 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/12 14:17:36 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ void update_exit_value_env(char *var, char *value)
 	env = g_tools.g_env;
 	while (env)
 	{
-		if (!ft_strncmp(var, env->variable, ft_strlen(var) + 1))
-			env->value = ft_strjoin( env->value, ft_substr(value, ft_strlen(env->variable) +1,ft_strlen(value)));
+		
+		if (!ft_strcmp(var, env->variable))
+			env->value = ft_strjoin( env->value, ft_substr(value, ft_strlen(env->variable) + 1,ft_strlen(value)));
+		
 		env = env->next;
 	}
 }
@@ -92,7 +94,7 @@ char *get_value_of_env(char *value)
 	while (env)
 	{
 		if (!ft_strncmp(value , env->variable, ft_strlen(value) +1))
-			return (ft_strnstr(env->value, "=", ft_strlen(env->value) -  ft_strlen(value) +1 ) + 1);
+			return (ft_strstr(env->value, "=") + 1);
 		env = env->next;
 	}
 	return (NULL);
@@ -146,6 +148,19 @@ void add_new_env(char **str)
 		str++;
 	}
 }
+void	add_empty_env()
+{
+	new_value_in_env(ft_strjoin("PWD=", ft_cwd()), 0);
+	new_value_in_env(ft_strjoin("SHLVL=", "1"), 0);
+}
+
+void update_shlvl(char *str)
+{
+	char *value;
+	value = ft_itoa(ft_atoi(str) + 3) ;
+	ft_unset(ft_split("SHLVL", ' '));
+	new_value_in_env(ft_strjoin("SHLVL=", value), 0);	
+}
 
 void set_env(char **envr)
 {
@@ -153,6 +168,13 @@ void set_env(char **envr)
 	env = g_tools.g_env;
 	char *value;
 	char *variable;
+
+	if (!*envr)
+	{
+		add_empty_env();
+		update_shlvl(get_value_of_env("SHLVL"));
+		return ;
+	}
 
 	while (*envr)
 	{
@@ -163,6 +185,7 @@ void set_env(char **envr)
 		envr++;
 	}
 	g_tools.g_env = env;
+	update_shlvl(get_value_of_env("SHLVL"));
 	
 }
 
@@ -170,7 +193,7 @@ void get_expoted()
 {
 	t_env *env;
 	char *value;
-	env = g_tools.g_env;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+	env = g_tools.g_env;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 	while (env)
 	{
 		printf("declare -x ");

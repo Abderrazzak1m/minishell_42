@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 19:51:11 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/04 08:55:41 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/12 14:19:50 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,8 @@ void ft_unset(char **cmd)
 {
 	if (!cmd)
 		return ;
-	g_tools.g_env = ft_delete_head(*cmd);
+	// g_tools.g_env = ft_delete_head(*cmd);
 	while (*cmd)
 		g_tools.g_env =	delete_in_env(*cmd++);
 	
-	// get_env();
 }
