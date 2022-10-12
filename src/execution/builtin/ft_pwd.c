@@ -6,7 +6,7 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 20:02:32 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/02 16:18:25 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/12 19:08:54 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	ft_pwd(char **cmnd)
 		printf("%s\n", ft_cwd());
 	else
 		ft_putendl_fd("too many argument", 2);	
-	
+
 }

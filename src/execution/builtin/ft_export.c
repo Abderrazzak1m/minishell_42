@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:14:41 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/12 14:17:36 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/12 19:08:48 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ void	add_empty_env()
 void update_shlvl(char *str)
 {
 	char *value;
-	value = ft_itoa(ft_atoi(str) + 3) ;
+	value = ft_itoa(ft_atoi(str) + 1) ;
 	ft_unset(ft_split("SHLVL", ' '));
 	new_value_in_env(ft_strjoin("SHLVL=", value), 0);	
 }

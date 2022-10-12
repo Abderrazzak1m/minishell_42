@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_value.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 23:42:25 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/04 16:04:54 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/12 15:46:02 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void  expand_data(t_token *token)
 	{
 		if (tmp->type == SIGN)
 			expand_val_sign(&tmp->val);
+		if (tmp->type == EXIT_STATUS)
+			  tmp->val = ft_itoa(g_tools.status_sign);
 		if (tmp->type == WORD)
 		{
 			if (tmp->val[0] == '~' && tmp->val[1] == '\0')

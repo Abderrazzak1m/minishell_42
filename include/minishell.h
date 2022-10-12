@@ -6,7 +6,7 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 20:38:52 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/07 23:04:03 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/12 18:46:02 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <readline/history.h>
 # include <termios.h>
 # include <fcntl.h>
+# include <errno.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <dirent.h>
@@ -121,7 +122,7 @@ t_cmd *new_cmnd(t_red *red, char **cmnd);
 int parser(t_cmd **cmd, t_token *tokens);
 
 // ecex
-void ft_exuc_command(t_cmd *cmd, t_token *token, t_env *env, char **envr);
+void ft_exuc_command(t_cmd *cmd, t_token *token, t_env *env);
 int reset_io(t_cmd *cmd);
 void ft_open_herdoc(t_token *tokens);
 
@@ -134,4 +135,5 @@ void ft_unset(char **cmd);
 void ft_exit(char **value_exit);
 void ft_echo(char **cmd);
 t_env	*ft_delete_head(char *value);
+void	ft_handl_error(char *s1, char *s2, char *s3, int status);
 #endif
