@@ -1,6 +1,6 @@
 # minishell_42
 # Chapter I
-Introduction
+. Introduction
 The existence of shells is linked to the very existence of IT.
 At the time, all developers agreed that communicating with a computer using aligned
 1/0 switches was seriously irritating.
