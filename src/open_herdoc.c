@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:32:39 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/11 16:34:41 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/13 23:55:57 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ char	*get_filename(char *filename)
 
 void	opning_line(char **value, int *type)
 {
-	char *line;
-	char	*buff;
-	int		fd;
-	static int id;
-	char  *filename;
-	
+	char		*line;
+	char		*buff;
+	int			fd;
+	static int	id;
+	char		*filename;
+
 	buff = ft_strdup("");
 	while (1)
 	{
@@ -58,7 +58,6 @@ void	opning_line(char **value, int *type)
 		buff = ft_strjoin(buff, ft_strjoin(line, "\n"));
 	}
 	filename = get_filename(ft_strjoin("/tmp/.fileherdooc", ft_itoa(id++)));
-	
 	*value = filename;
 	fd = open (*value, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	*type = WORD;
@@ -66,38 +65,35 @@ void	opning_line(char **value, int *type)
 	close(fd);
 }
 
-
-void edit_signs(char **value, int type, t_token *token)
+void	edit_signs(char **value, int type, t_token *token)
 {
-	t_token *tmp;
-	tmp = token;
+	t_token	*tmp;
+	char	*buff;
 
-	char *buff;
-	
+	tmp = token;
 	buff = ft_strdup("");
 	if (type == SIGN || type == WORD || type == EXIT_STATUS)
 	{
-				while (tmp->type != WSPACE)
-				{
-					if (tmp->type == WORD)
-						buff = ft_strjoin(buff, ft_strjoin("", tmp->val));
-					else if (tmp->type == SIGN || tmp->type == EXIT_STATUS)
-						buff = ft_strjoin(buff, ft_strjoin("$", tmp->val));
-					if( tmp->next && tmp->next->type != WSPACE)
-					{
-						tmp->next->val = "\t";
-						tmp->next->type = WSPACE;
-					}
-					if (tmp->next == NULL)
-						break;	
-					tmp = tmp->next;
-				}	
+		while (tmp->type != WSPACE)
+		{
+			if (tmp->type == WORD)
+				buff = ft_strjoin(buff, ft_strjoin("", tmp->val));
+			else if (tmp->type == SIGN || tmp->type == EXIT_STATUS)
+				buff = ft_strjoin(buff, ft_strjoin("$", tmp->val));
+			if (tmp->next && tmp->next->type != WSPACE)
+			{
+				tmp->next->val = "\t";
+				tmp->next->type = WSPACE;
+			}
+			if (tmp->next == NULL)
+				break ;
+			tmp = tmp->next;
+		}	
 		*value = buff;
 	}
 }
 
-
-void ft_open_herdoc(t_token *token)
+void	ft_open_herdoc(t_token *token)
 {
 	while (token)
 	{
@@ -105,16 +101,16 @@ void ft_open_herdoc(t_token *token)
 		{
 			if (token->next->type == WSPACE && token->next != NULL)
 			{
-				edit_signs(&token->next->next->val,token->next->next->type, token->next->next);
+				edit_signs(&token->next->next->val, token->next->next->type, \
+					token->next->next);
 				opning_line(&token->next->next->val, &token->next->next->type);
 			}
-				
 			else
 			{
 				edit_signs(&token->next->val, token->next->type, token->next);
 				opning_line(&token->next->val, &token->next->type);
 			}
 		}
-		token = token->next;	
+		token = token->next;
 	}
 }

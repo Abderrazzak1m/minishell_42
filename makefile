@@ -20,6 +20,7 @@ CC = cc -Wall -Wextra -Werror #-fsanitize=address
 SRC =$(FILES_SRC)/main.c \
 	$(FILES_SRC)/readline.c \
 	$(FILES_SRC)/lexer.c \
+	$(FILES_SRC)/lexer_utils.c \
 	$(FILES_SRC)/token_utils.c \
 	$(FILES_SRC)/parser.c \
 	$(FILES_SRC)/red_utils.c \

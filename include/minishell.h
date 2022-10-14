@@ -6,7 +6,7 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 20:38:52 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/12 18:46:02 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/13 23:02:31 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,17 @@ int all_ws(char *line);
 int check_ws(char *line, t_token **tokens);
 int is_ws(char c);
 
-//lixer
-void lexer(char *line, t_token **tokens);
-int append(t_token **tokens, t_token *newtoken);
+//lexer
+void    lexer(char *line, t_token **tokens);
+int     append(t_token **tokens, t_token *newtoken);
 t_token *new_token(char *val, int type);
-void clean_tokens(t_token **tokens);
+void    clean_tokens(t_token **tokens);
+int     is_word(char *line, t_token **tokens, char *sc);
+int     is_sc(char *line, t_token **tokens);
+int     is_sign(char *line, t_token **tokens);
+int     is_squot(char *line, t_token **tokens);
+int     is_dquot(char *line, t_token **tokens);
+int     is_red(char *line, t_token **tokens);
 
 //enverment
 void get_env();
