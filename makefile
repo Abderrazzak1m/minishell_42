@@ -15,7 +15,7 @@ LIBFT_LIB = $(LIBFT_DIR)/libft.a
 
 
 
-CC = cc -Wall -Wextra -Werror #-fsanitize=address
+CC = cc -Wall -Wextra -Werror 
 
 SRC =$(FILES_SRC)/main.c \
 	$(FILES_SRC)/readline.c \
@@ -31,8 +31,11 @@ SRC =$(FILES_SRC)/main.c \
 	$(FILES_SRC)/execution/reset_io.c \
 	$(FILES_SRC)/open_herdoc.c \
 	$(FILES_SRC)/execution/exuc_commond.c \
+	$(FILES_SRC)/execution/print_error.c \
 	$(FILES_SRC)/execution/builtin/ft_cd.c \
 	$(FILES_SRC)/execution/builtin/ft_export.c \
+	$(FILES_SRC)/execution/builtin/ft_export2.c \
+	$(FILES_SRC)/execution/builtin/ft_export3.c \
 	$(FILES_SRC)/execution/builtin/ft_echo.c \
 	$(FILES_SRC)/execution/builtin/ft_pwd.c \
 	$(FILES_SRC)/execution/builtin/ft_env.c \
@@ -59,7 +62,7 @@ $(LIBFT_LIB) :
 
 clean:
 	rm -rf $(OBJ)
-	$(MAKE) fclean -C $(LIBFT_DIR)
+	$(MAKE) clean -C $(LIBFT_DIR)
 fclean : clean
 	rm -rf $(NAME)
 	$(MAKE) fclean -C $(LIBFT_DIR)

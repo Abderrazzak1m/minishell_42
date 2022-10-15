@@ -6,19 +6,20 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:41:26 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/02 16:17:27 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/14 15:53:11 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-void ft_switch()
+void	ft_switch(void)
 {
-	char *old;
-	char *new;
-	if(check_env_value("OLDPWD"))
+	char	*old;
+	char	*new;
+
+	if (check_env_value("OLDPWD"))
 	{
-		perror ("OLDPWD NOT SET");
+		perror("OLDPWD NOT SET");
 		return ;
 	}
 	else
@@ -26,16 +27,16 @@ void ft_switch()
 	if (!check_env_value("PWD"))
 		old = get_value_of_env("PWD");
 	else
-		old = ft_cwd(); 
+		old = ft_cwd();
 	ft_unset(ft_split("OLDPWD", ' '));
 	ft_unset(ft_split("PWD", ' '));
 	new_value_in_env(ft_strjoin("OLDPWD=", old), 0);
 	new_value_in_env(ft_strjoin("PWD=", new), 0);
 	chdir(new);
 	printf("%s\n", new);
-		
 }
-void ft_update_pwd(char *old)
+
+void	ft_update_pwd(char *old)
 {
 	ft_unset(ft_split("PWD", ' '));
 	ft_unset(ft_split("OLDPWD", ' '));
@@ -43,11 +44,12 @@ void ft_update_pwd(char *old)
 	new_value_in_env(ft_strjoin("PWD=", ft_cwd()), 0);
 }
 
-void ft_cd(char **cmd)
+void	ft_cd(char **cmd)
 {
-	char *old;
+	char	*old;
+
 	old = ft_cwd();
-	if(!cmd[1])
+	if (!cmd[1])
 	{
 		chdir(getenv("HOME"));
 		ft_update_pwd(old);
@@ -70,5 +72,4 @@ void ft_cd(char **cmd)
 			ft_update_pwd(old);
 		}
 	}
-	
 }

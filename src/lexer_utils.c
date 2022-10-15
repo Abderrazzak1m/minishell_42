@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../include/minishell.h"
+#include "../include/minishell.h"
 
 int	is_word(char *line, t_token **tokens, char *sc)
 {
@@ -67,7 +67,7 @@ int	is_sign(char *line, t_token **tokens)
 	i = 0;
 	if (line[i++] == '$')
 	{
-		if (ft_strchr(SC_S, line[i]) || ft_isdigit(line[i]) || \
+		if (ft_strchr(SC_S, line[i]) || ft_isdigit(line[i]) ||
 			line[i] == '?' || ft_strchr(SC, line[i]) || line[i] == '\'')
 			return (is_sc(&line[i], tokens));
 		else

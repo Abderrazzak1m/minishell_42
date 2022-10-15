@@ -6,15 +6,15 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 21:55:16 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/12 19:08:59 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/14 15:50:13 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-int check_is_n(char *str)
+int	check_is_n(char *str)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	if (*str == '-')
@@ -32,7 +32,7 @@ int check_is_n(char *str)
 	return (0);
 }
 
-void print_not_new_line(char **str)
+void	print_not_new_line(char **str)
 {
 	while (*str)
 	{
@@ -42,16 +42,17 @@ void print_not_new_line(char **str)
 			printf(" ");
 	}
 }
-void print_without_new_line(char **str)
+
+void	print_without_new_line(char **str)
 {
 	while (*str)
 		printf("%s ", *str++);
 	printf("\n");
 }
 
-void check_echo(char **cmd)
+void	check_echo(char **cmd)
 {
-	int is_not_nl;
+	int	is_not_nl;
 
 	is_not_nl = 0;
 	if (!check_is_n(*cmd))
@@ -60,7 +61,7 @@ void check_echo(char **cmd)
 		while (*cmd)
 		{
 			if (check_is_n(*cmd) == 2 || check_is_n(*cmd) == 1)
-				break;
+				break ;
 			cmd++;
 		}
 		print_not_new_line(cmd);
@@ -69,12 +70,12 @@ void check_echo(char **cmd)
 		print_without_new_line(cmd);
 }
 
-void ft_echo(char **cmd)
+void	ft_echo(char **cmd)
 {
 	if (!*cmd)
 	{
 		ft_putendl_fd("", 1);
-		return;
+		return ;
 	}
 	check_echo(cmd);
 }

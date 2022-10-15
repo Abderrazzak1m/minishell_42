@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:07:08 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/12 13:16:00 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/14 15:58:30 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-void ft_ev(void)
+void	ft_ev(void)
 {
 	get_env();
 }

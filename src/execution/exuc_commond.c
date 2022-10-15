@@ -6,7 +6,7 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 17:23:06 by amiski            #+#    #+#             */
-/*   Updated: 2022/10/12 19:30:23 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/15 22:19:15 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int	is_executable(char **path, t_cmd *cmd)
 
 int	ft_check_is_builtin(char **cmnd)
 {
+	if (!cmnd[0])
+		return (-1);
 	if (!ft_strncmp(*cmnd, "echo", ft_strlen(*cmnd)))
 		return (ft_echo(++cmnd), 1);
 	if (!ft_strncmp(*cmnd, "cd", ft_strlen(*cmnd)))
@@ -88,28 +90,24 @@ int	run_cmd(t_cmd *cmd, t_env *env)
 	char	**path;
 	int		pid;
 
-	if(ft_check_is_builtin(cmd->cmnd))
+	if (ft_check_is_builtin(cmd->cmnd))
 	{
 		g_tools.status_sign = 0;
-		return(1);
+		return (1);
 	}
 	pid = fork();
 	if (pid < 0)
 		return (0);
 	if (pid == 0)
-	{	
+	{
 		signal(SIGQUIT, SIG_DFL);
 		signal(SIGINT, SIG_DFL);
 		path = get_path(env);
 		if (ft_strchr(cmd->cmnd[0], '/'))
-		{
-			puts(cmd->cmnd[0]);
-			execve(cmd->cmnd[0], cmd->cmnd, get_d_env());
-			exit(126);
-		}
+			if (execve(cmd->cmnd[0], cmd->cmnd, get_d_env()) == -1)
+				print_error(1, cmd->cmnd[0]);
 		if (!is_executable(path, cmd))
-			exit(127);
-		
+			print_error(0, cmd->cmnd[0]);
 		else
 			g_tools.status_sign = 0;
 		return (1);
@@ -122,39 +120,30 @@ int	run_cmd(t_cmd *cmd, t_env *env)
 void	ft_exuc_command(t_cmd *cmd, t_token *token, t_env *env)
 {
 	int	fd[2];
-	int	signal_status;
 
 	(void)token;
-    fd[1] = dup(1);
-    fd[0] = dup(0);
+	fd[1] = dup(1);
+	fd[0] = dup(0);
 	while (cmd)
 	{
 		if (reset_io(cmd))
 		{
-			if (run_cmd(cmd,env) == 0)
+			if (run_cmd(cmd, env) == 0)
 			{
 				dup2(fd[1], 1);
 				dup2(fd[0], 0);
 				close(cmd->pipe[0]);
 				break ;
-			}	
+			}
 			dup2(fd[1], 1);
 			dup2(fd[0], 0);
 		}
+		else
+			dup2(fd[1], 1);
+			dup2(fd[0], 0);
 		cmd = cmd->next;
 	}
 	close(fd[1]);
 	close(fd[0]);
-	while (1)
-	{
-		if (waitpid(-1, &signal_status, 0) == -1)
-			break;
-	}
-	
-	if (WIFEXITED(signal_status))
-	  g_tools.status_sign=  WEXITSTATUS(signal_status);
-	else if(WIFSIGNALED(signal_status))
-	{
-		g_tools.status_sign = 128 + WTERMSIG(signal_status);
-	}
+	signal_wait();
 }

@@ -6,7 +6,7 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 21:17:46 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/02 16:18:09 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/14 12:48:59 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_is_number(char *c)
 	return (1);
 }
 
-void ft_exit(char **value_exit)
+void	ft_exit(char **value_exit)
 {
 	if (!value_exit[0])
 	{
@@ -43,7 +43,7 @@ void ft_exit(char **value_exit)
 			exit(255);
 		}
 	}
-	if (ft_is_number(value_exit[0])  && value_exit[1])
+	if (ft_is_number(value_exit[0]) && value_exit[1])
 		printf("exit\nminishell bash: exit: too many arguments\n");
 	else
 	{

@@ -3,33 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 19:51:11 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/12 14:19:50 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/14 15:57:53 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-
 t_env	*ft_delete_head(char *value)
 {
-	t_env *tmp;
+	t_env	*tmp;
+
 	tmp = g_tools.g_env;
-	if(!check_env_value(value))
+	if (!check_env_value(value))
 	{
 		tmp = tmp->next;
 	}
-		
-	
 	return (tmp);
 }
+
 t_env	*delete_in_env(char *value)
 {
-	t_env *tmp;
-	t_env *prv;
-	t_env *list;
+	t_env	*tmp;
+	t_env	*prv;
+	t_env	*list;
 
 	tmp = g_tools.g_env;
 	prv = g_tools.g_env;
@@ -39,8 +38,7 @@ t_env	*delete_in_env(char *value)
 	prv = list;
 	while (tmp)
 	{
-	
-		if(!ft_strncmp(tmp->variable, value, ft_strlen(tmp->variable) + 1))
+		if (!ft_strncmp(tmp->variable, value, ft_strlen(tmp->variable) + 1))
 		{
 			prv->next = tmp->next;
 			break ;
@@ -51,12 +49,10 @@ t_env	*delete_in_env(char *value)
 	return (list);
 }
 
-void ft_unset(char **cmd)
+void	ft_unset(char **cmd)
 {
 	if (!cmd)
 		return ;
-	// g_tools.g_env = ft_delete_head(*cmd);
 	while (*cmd)
-		g_tools.g_env =	delete_in_env(*cmd++);
-	
+		g_tools.g_env = delete_in_env(*cmd++);
 }
