@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:14:41 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/16 16:32:11 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/16 17:26:31 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	add_empty_env(void)
 {
 	new_value_in_env(ft_strjoin("PWD=", ft_cwd()), 0);
-	new_value_in_env(ft_strjoin("SHLVL=", "1"), 0);
+	new_value_in_env(ft_strjoin("SHLVL=", "0"), 0);
 }
 
 void	update_shlvl(char *str)
@@ -23,8 +23,8 @@ void	update_shlvl(char *str)
 	char	*value;
 
 	value = ft_itoa(ft_atoi(str) + 1);
-	// ft_unset(ft_split("SHLVL", ' '));
-	// new_value_in_env(ft_strjoin("SHLVL=", value), 0);
+	ft_unset(ft_split("SHLVL", ' '));
+	new_value_in_env(ft_strjoin("SHLVL=", value), 0);
 }
 
 void	set_env(char **envr)

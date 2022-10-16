@@ -6,57 +6,48 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 19:51:11 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/16 16:27:53 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/16 17:23:15 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-t_env	*ft_delete_head(char *value)
+
+void delete_in_env(char *value, t_env*tmp)
 {
-	t_env	*tmp;
-
-	tmp = g_tools.g_env;
-	if (!ft_strcmp(tmp->value,value))
-	{
-		if (tmp->next)
-			tmp = tmp->next;
-		else
-			return (NULL);
-	}
-	return (tmp);
-}
-
-t_env	*delete_in_env(char *value)
-{
-	t_env	*tmp;
-	t_env	*prv;
-	t_env	*list;
-
-	tmp = g_tools.g_env;
-	prv = g_tools.g_env;
-	list = g_tools.g_env;
-	tmp = tmp->next;
-	tmp = list->next;
-	prv = list;
 	while (tmp)
 	{
-		if (!ft_strncmp(tmp->variable, value, ft_strlen(tmp->variable) + 1))
+		if (!ft_strcmp(tmp->variable, value))
 		{
-			prv->next = tmp->next;
+			if (tmp->prev == NULL && tmp->next)
+			{
+				g_tools.g_env = tmp->next;
+				g_tools.g_env->prev = NULL;
+				break ;
+			}
+			else if (tmp->prev && tmp->next == NULL)
+				tmp->prev->next = NULL;
+			else if (!tmp->next && !tmp->prev)
+				g_tools.g_env = NULL;
+			else
+			{
+				tmp->prev->next = tmp->next;
+				tmp->next->prev = tmp->prev;
+			}
 			break ;
 		}
 		tmp = tmp->next;
-		prv = prv->next;
 	}
-	return (list);
 }
 
 void	ft_unset(char **cmd)
 {
+	t_env *tmp;
+
+	tmp = g_tools.g_env;
 	if (!cmd)
 		return ;
-	g_tools.g_env = ft_delete_head(*cmd);	
 	while (*cmd)
-		g_tools.g_env = delete_in_env(*cmd++);
+		 delete_in_env(*cmd++, tmp);
+	
 }
