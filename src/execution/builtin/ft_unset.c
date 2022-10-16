@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 19:51:11 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/14 15:57:53 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/16 16:27:53 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ t_env	*ft_delete_head(char *value)
 	t_env	*tmp;
 
 	tmp = g_tools.g_env;
-	if (!check_env_value(value))
+	if (!ft_strcmp(tmp->value,value))
 	{
-		tmp = tmp->next;
+		if (tmp->next)
+			tmp = tmp->next;
+		else
+			return (NULL);
 	}
 	return (tmp);
 }
@@ -53,6 +56,7 @@ void	ft_unset(char **cmd)
 {
 	if (!cmd)
 		return ;
+	g_tools.g_env = ft_delete_head(*cmd);	
 	while (*cmd)
 		g_tools.g_env = delete_in_env(*cmd++);
 }
