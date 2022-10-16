@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:41:26 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/14 15:53:11 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/16 15:40:20 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,22 @@ void	ft_switch(void)
 
 void	ft_update_pwd(char *old)
 {
+	static int status;
+
+	
 	ft_unset(ft_split("PWD", ' '));
-	ft_unset(ft_split("OLDPWD", ' '));
-	new_value_in_env(ft_strjoin("OLDPWD=", old), 0);
 	new_value_in_env(ft_strjoin("PWD=", ft_cwd()), 0);
+	if (!status || !check_env_value("OLDPWD"))
+	{
+		if (!get_value_of_env("OLDPWD") && status)
+			return ;
+			
+		ft_unset(ft_split("OLDPWD", ' '));
+		new_value_in_env(ft_strjoin("OLDPWD=", old), 0);
+		
+	}
+	
+	status++;
 }
 
 void	ft_cd(char **cmd)

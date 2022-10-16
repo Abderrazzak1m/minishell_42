@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amiski <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 23:14:16 by amiski            #+#    #+#             */
-/*   Updated: 2022/10/13 23:15:51 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/16 14:45:39 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../include/minishell.h"
+
+void to_lower(char **str)
+{
+	int	i;
+
+	i = -1;
+	while ((*str)[++i])
+	{
+		if ((*str)[i] >= 'A' && (*str)[i] <= 'Z')
+			(*str)[i] = ft_tolower((*str)[i]);
+	}
+	
+}
 
 t_cmd	*new_cmnd(t_red *red, char **cmnd)
 {

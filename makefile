@@ -4,7 +4,7 @@ INC = ./include/minishell.h  \
 	libft/libft.h
 
 READLINE = $(shell brew --prefix readline)
-
+RM = rm -rf
 INCLUDE_READLINE = $(addprefix $(READLINE),/include)
 
 LIB_READLINE = $(addprefix $(READLINE),/lib)
@@ -61,9 +61,9 @@ $(LIBFT_LIB) :
 	$(MAKE) -C $(LIBFT_DIR)
 
 clean:
-	rm -rf $(OBJ)
+	$(RM) $(OBJ)
 	$(MAKE) clean -C $(LIBFT_DIR)
 fclean : clean
-	rm -rf $(NAME)
+	$(RM) $(NAME)
 	$(MAKE) fclean -C $(LIBFT_DIR)
 re: fclean all

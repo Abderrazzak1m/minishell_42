@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 20:38:52 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/14 16:04:00 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/16 14:43:51 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,4 +153,6 @@ int		put_error(t_red *red);
 void	signal_wait(void);
 void	print_error(int type, char *str);
 void	ft_handl_error(char *s1, char *s2, char *s3, int status);
+
+void to_lower(char **str);
 #endif

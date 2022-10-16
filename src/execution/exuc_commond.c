@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exuc_commond.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 17:23:06 by amiski            #+#    #+#             */
-/*   Updated: 2022/10/15 22:19:15 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/16 14:46:49 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,13 @@ int	ft_check_is_builtin(char **cmnd)
 {
 	if (!cmnd[0])
 		return (-1);
+	if (!ft_strncmp(*cmnd, "export", ft_strlen(*cmnd)))
+		return (ft_export(cmnd), 1);
+	if (!ft_strncmp(*cmnd, "exit", ft_strlen(*cmnd)))
+		return (ft_exit(++cmnd), 1);
+	if (!ft_strncmp(*cmnd, "unset", ft_strlen(*cmnd)))
+		return (ft_unset(++cmnd), 1);
+	to_lower(&cmnd[0]); 
 	if (!ft_strncmp(*cmnd, "echo", ft_strlen(*cmnd)))
 		return (ft_echo(++cmnd), 1);
 	if (!ft_strncmp(*cmnd, "cd", ft_strlen(*cmnd)))
@@ -76,12 +83,6 @@ int	ft_check_is_builtin(char **cmnd)
 		return (ft_pwd(cmnd), 1);
 	if (!ft_strncmp(*cmnd, "env", ft_strlen(*cmnd)))
 		return (ft_ev(), 1);
-	if (!ft_strncmp(*cmnd, "export", ft_strlen(*cmnd)))
-		return (ft_export(cmnd), 1);
-	if (!ft_strncmp(*cmnd, "exit", ft_strlen(*cmnd)))
-		return (ft_exit(++cmnd), 1);
-	if (!ft_strncmp(*cmnd, "unset", ft_strlen(*cmnd)))
-		return (ft_unset(++cmnd), 1);
 	return (0);
 }
 
