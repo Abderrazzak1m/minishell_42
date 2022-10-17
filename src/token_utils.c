@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:47:39 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/13 23:14:10 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/17 09:24:14 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_token	*new_token(char *val, int type)
 	t_token	*new_t;
 
 	new_t = malloc(sizeof(t_token));
+	add(&g_tools.garbage, new_env);
 	if (!new_t)
 		return (NULL);
 	new_t->next = NULL;

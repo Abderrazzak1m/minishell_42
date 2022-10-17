@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 23:14:16 by amiski            #+#    #+#             */
-/*   Updated: 2022/10/16 14:45:39 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/17 09:24:46 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_cmd	*new_cmnd(t_red *red, char **cmnd)
 	t_cmd	*new_t;
 
 	new_t = malloc(sizeof(t_cmd));
+	add(&g_tools.garbage, new_t);
 	if (!new_t)
 		return (NULL);
 	new_t->next = NULL;

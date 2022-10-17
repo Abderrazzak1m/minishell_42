@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 23:05:53 by amiski            #+#    #+#             */
-/*   Updated: 2022/10/13 23:05:54 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/17 09:25:43 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	is_word(char *line, t_token **tokens, char *sc)
 		while (!ft_strchr(sc, line[i]))
 			i++;
 		buff = malloc(sizeof(char) * i + 1);
+		add(&g_tools.garbage, buff);
 		ft_strlcpy(buff, line, i + 1);
 		append(tokens, new_token(buff, WORD));
 		return (i);
@@ -41,6 +42,7 @@ int	is_sc(char *line, t_token **tokens)
 	if (ft_isdigit(line[i]))
 	{
 		buff = malloc(sizeof(char) * 2);
+		add(&g_tools.garbage, buff);
 		append(tokens, new_token(ft_memcpy(buff, &line[i], 1), SIGN));
 		return (2);
 	}
@@ -52,6 +54,7 @@ int	is_sc(char *line, t_token **tokens)
 	else if (ft_strchr(SC, line[i]))
 	{
 		buff = malloc(sizeof(char) * 2);
+		add(&g_tools.garbage, buff);
 		append(tokens, new_token(ft_memcpy(buff, &line[i - 1], 2), WORD));
 		return (2);
 	}
@@ -75,6 +78,7 @@ int	is_sign(char *line, t_token **tokens)
 			while (!ft_strchr(SC, line[i]))
 				i++;
 			buff = malloc(sizeof(char) * i + 1);
+			add(&g_tools.garbage, buff);
 			ft_strlcpy(buff, line + 1, i);
 			append(tokens, new_token(buff, SIGN));
 			return (i);
@@ -94,6 +98,7 @@ int	is_squot(char *line, t_token **tokens)
 		while (line[++i] != '\'')
 			;
 		buff = malloc(sizeof(char) * (i - 1));
+		add(&g_tools.garbage, buff);
 		buff[i - 1] = 0;
 		append(tokens, new_token(ft_memcpy(buff, &line[1], i - 1), WORD));
 		return (i + 1);
@@ -114,6 +119,7 @@ int	is_dquot(char *line, t_token **tokens)
 		while (line[++i] != '\"')
 			;
 		buff = malloc(sizeof(char) * i);
+		add(&g_tools.garbage, buff);
 		buff = ft_memcpy(buff, &line[1], i - 1);
 		buff[i - 1] = 0;
 		while (buff[j])

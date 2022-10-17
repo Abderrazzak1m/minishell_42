@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 20:38:52 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/16 14:43:51 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/17 09:18:23 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,16 @@ typedef struct s_env
 	struct s_env	*next;
 	struct s_env	*prev;
 }	t_env;
+// Garbage Collector !!!
+typedef struct s_node_free
+{
+	void				*pointer;
+	struct s_node_free	*next;
+}	t_node_free;
 
 typedef struct s_globals
 {
+	t_node_free	*garbage;
 	t_env	*g_env;
 	int		status_sign;
 	int		shlvl;
@@ -153,6 +160,8 @@ int		put_error(t_red *red);
 void	signal_wait(void);
 void	print_error(int type, char *str);
 void	ft_handl_error(char *s1, char *s2, char *s3, int status);
-
 void to_lower(char **str);
+// garbage collercor
+void	add(t_node_free **garbage, void *pointer);
+void	free_all(t_node_free *garbage);
 #endif

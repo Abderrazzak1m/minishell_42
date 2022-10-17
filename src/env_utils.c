@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:42:08 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/09/27 00:26:34 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/17 09:26:07 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_env *new_env(char *variable, char *value)
 {
 	t_env *new_t;
 	new_t = malloc(sizeof(t_env));
+	add(&g_tools.garbage, new_env);
 	if (!new_t)
 		return (NULL);
 	new_t->next = NULL;

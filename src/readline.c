@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:23:53 by amiski            #+#    #+#             */
-/*   Updated: 2022/10/14 16:23:54 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/17 09:58:19 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,18 @@ void	ft_handel_sig(int sig)
 {
 	(void)sig;
 	printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	// rl_on_new_line();
+	// rl_replace_line("", 0);
+	// rl_redisplay();
 }
 
 void	ft_readline(char **line)
 {
 	signal(SIGINT, ft_handel_sig);
 	signal(SIGQUIT, SIG_IGN);
-	rl_catch_signals = 0;
+	// rl_catch_signals = 0;
 	*line = readline("miniShell> ");
+	add(&g_tools.garbage,*line);
 	if (!(*line))
 	{
 		printf("exit\n");

@@ -3,13 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amiski <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 09:10:23 by amiski            #+#    #+#             */
-/*   Updated: 2021/11/10 22:01:30 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/17 09:41:57 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include"libft.h"
+#include "../include/minishell.h"
 
 static char	**ft_errormal(char **tab, int n)
 {
@@ -65,6 +67,7 @@ static char	**ft_malloc(char **str, char const *s, char c, int n)
 		if (k != 0)
 		{
 			str[i] = (char *)malloc((k + 1) * sizeof(char));
+			add(&g_tools.garbage, str[i]);
 			if (str[i] == NULL)
 				return (ft_errormal(str, i));
 			i++;
@@ -111,9 +114,11 @@ char	**ft_split(char const *s, char c)
 		return (0);
 	len = nbrchaine(s, c);
 	str = (char **)malloc((len + 1) * sizeof(char *));
+	add(&g_tools.garbage, str);
 	if (!str)
 		return (0);
 	str = ft_malloc(str, s, c, len);
+	add(&g_tools.garbage, str);
 	if (!str)
 		return (0);
 	ft_remp(str, s, c, len);

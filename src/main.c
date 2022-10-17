@@ -3,34 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 20:43:26 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/14 16:51:22 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/17 10:00:58 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 t_globals	g_tools = {0};
-void	print_red(t_red *rd)
-{
-	while (rd)
-	{
-		printf(" ------------red-----------------\n");
-		printf("\tf_name : %s type : %d\n", rd->f_name, rd->type);
-		rd = rd->next;
-	}
-}
-
-void	print_cmd(char **tab)
-{
-	while (*tab)
-	{
-		printf("%s\n", *tab);
-		tab++;
-	}
-}
 
 int	all_ws(char *line)
 {
@@ -51,6 +33,7 @@ int	main(int ac, char **av, char **envr)
 	t_cmd *cmd;
 
 	(void)av;
+	(void)envr;
 	set_env(envr);
 	if (ac != 1)
 	{
@@ -61,6 +44,7 @@ int	main(int ac, char **av, char **envr)
 	{
 		ft_readline(&line);
 		line = ft_strtrim(line, " ");
+		add(&g_tools.garbage,line);
 		if (!line || all_ws(line))
 		{
 			free(line);
@@ -74,32 +58,14 @@ int	main(int ac, char **av, char **envr)
 			clean_tokens(&tokens);
 			continue ;
 		}
-
-		//continue ;
 		ft_open_herdoc(tokens);
 		expand_data(tokens);
 		parser(&cmd, tokens);
 		ft_exuc_command(cmd, tokens, g_tools.g_env);
-		// while (1);
-
-		// while(cmd)
-		// {
-		//     printf("-------------new cmd---------------\n");
-
-		//     print_cmd(cmd->cmnd);
-		//     print_red(cmd->red);
-		//     cmd = cmd->next;
-		// }
-
-		// while(tokens)
-		// {
-		//     puts("--------------------------");
-		//     printf("---value  => %s \n---type  ..=> %d\n",tokens->val,
-		//		tokens->type;
-		//     puts("-------------------------");
-		//     tokens = tokens->next;
-		// }
+		free(line);
 		clean_cmnds(&cmd);
 		clean_tokens(&tokens);
 	}
+	// rl_clear_history();
+	free_all(g_tools.garbage);
 }

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amiski <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:11:21 by amiski            #+#    #+#             */
-/*   Updated: 2021/11/14 11:09:33 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/17 09:27:33 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include"libft.h"
 
+#include"libft.h"
+#include "../include/minishell.h"
 static int	len_debut(char const *set, char const *s1)
 {
 	int	i;
@@ -66,6 +67,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	j = len_fin(set, s1);
 	len = j - i + 2;
 	str = (char *)malloc(sizeof(char) * len);
+	add(&g_tools.garbage, str);
 	if (!str)
 		return (0);
 	ft_memmove(str, s1 + i, (j - i + 1));

@@ -3,13 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amiski <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 09:59:55 by amiski            #+#    #+#             */
-/*   Updated: 2021/11/11 10:49:27 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/17 09:49:01 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
+#include "../include/minishell.h"
 
 int	len_str(int n)
 {
@@ -40,6 +42,7 @@ char	*ft_itoa(int n)
 	len = len_str(n);
 	nbr = n;
 	str = (char *)malloc((len + 1) * sizeof(char));
+	add(&g_tools.garbage, str);
 	if (!str)
 		return (0);
 	str[len] = '\0';

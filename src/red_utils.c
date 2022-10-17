@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   red_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amiski <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 23:06:51 by amiski            #+#    #+#             */
-/*   Updated: 2022/10/13 23:11:05 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/17 09:24:29 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_red	*new_red(int type, char *f_name)
 	t_red	*new_t;
 
 	new_t = malloc(sizeof(t_red));
+	add(&g_tools.garbage, new_t);
 	if (!new_t)
 		return (NULL);
 	new_t->next = NULL;

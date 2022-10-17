@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amiski <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 10:10:31 by amiski            #+#    #+#             */
-/*   Updated: 2021/11/11 19:29:45 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/17 09:26:57 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include"libft.h"
 
+#include "libft.h"
+#include "../include/minishell.h"
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
@@ -26,6 +27,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (newl >= len)
 		newl = len;
 	tab = malloc(sizeof(char) * (newl + 1));
+	add(&g_tools.garbage, tab);
 	if (!tab)
 		return (0);
 	while (i < newl && s[start])

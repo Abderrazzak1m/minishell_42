@@ -6,7 +6,7 @@
 /*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:14:41 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/16 17:26:31 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/17 09:52:39 by yoelhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ void	set_env(char **envr)
 			append_env(&env, new_env(variable, value));
 		envr++;
 	}
+	add(&g_tools.garbage, value);
+	add(&g_tools.garbage, variable);
+	add(&g_tools.garbage, g_tools.g_env);
 	g_tools.g_env = env;
 	update_shlvl(get_value_of_env("SHLVL"));
 }

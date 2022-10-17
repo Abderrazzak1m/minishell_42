@@ -3,7 +3,7 @@ NAME = minishell
 INC = ./include/minishell.h  \
 	libft/libft.h
 
-READLINE = $(shell brew --prefix readline)
+# READLINE = $(shell brew --prefix readline)
 RM = rm -rf
 INCLUDE_READLINE = $(addprefix $(READLINE),/include)
 
@@ -28,6 +28,7 @@ SRC =$(FILES_SRC)/main.c \
 	$(FILES_SRC)/expander_value.c \
 	$(FILES_SRC)/check_errors.c \
 	$(FILES_SRC)/env_utils.c \
+	$(FILES_SRC)/garbage_free.c  \
 	$(FILES_SRC)/execution/reset_io.c \
 	$(FILES_SRC)/open_herdoc.c \
 	$(FILES_SRC)/execution/exuc_commond.c \
