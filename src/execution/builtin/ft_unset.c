@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 19:51:11 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/17 09:53:56 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/18 22:39:34 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-
-void delete_in_env(char *value, t_env *tmp)
+void	delete_in_env(char *value, t_env *tmp)
 {
 	while (tmp)
 	{
@@ -38,18 +37,17 @@ void delete_in_env(char *value, t_env *tmp)
 		}
 		tmp = tmp->next;
 	}
-		add(&g_tools.garbage, tmp);
+	add(&g_tools.garbage, tmp);
 }
 
 void	ft_unset(char **cmd)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = g_tools.g_env;
 	add(&g_tools.garbage, tmp);
 	if (!cmd)
 		return ;
 	while (*cmd)
-		 delete_in_env(*cmd++, tmp);
-	
+		delete_in_env(*cmd++, tmp);
 }

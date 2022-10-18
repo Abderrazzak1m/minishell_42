@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:14:41 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/16 16:14:38 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/18 22:41:28 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	update_in_env(char *str, int type)
 	char	*tmp;
 	char	*var;
 
-if (ft_strchr(str, '='))
+	if (ft_strchr(str, '='))
 		tmp = ft_strstr(str, "=") + 1;
 	else
 		return ;
@@ -52,7 +52,6 @@ if (ft_strchr(str, '='))
 	}
 	ft_unset(ft_split(var, ' '));
 	new_value_in_env(ft_strjoin(ft_strjoin(var, "="), tmp), 0);
-	
 }
 
 char	*get_value_of_env(char *value)
@@ -69,8 +68,7 @@ char	*get_value_of_env(char *value)
 			if (!ft_strchr(env->value, '='))
 				return (NULL);
 			return (ft_strstr(env->value, "=") + 1);
-		}
-			
+		}	
 		env = env->next;
 	}
 	return (NULL);
@@ -115,12 +113,10 @@ void	add_new_env(char **str)
 			var = ft_substr(var, 0, ft_strlen(var) - 1);
 			stt = 1;
 		}
-		
 		if (check_env_value(var))
 		{
 			ft_unset(ft_split(var, ' '));
 			new_value_in_env(*str, stt);
-			
 		}
 		else
 			update_in_env(*str, stt);

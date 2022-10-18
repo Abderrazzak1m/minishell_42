@@ -3,7 +3,7 @@ NAME = minishell
 INC = ./include/minishell.h  \
 	libft/libft.h
 
-# READLINE = $(shell brew --prefix readline)
+READLINE = $(shell brew --prefix readline)
 RM = rm -rf
 INCLUDE_READLINE = $(addprefix $(READLINE),/include)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_herdoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:32:39 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/13 23:55:57 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/17 21:17:13 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	opning_line(char **value, int *type)
 	while (1)
 	{
 		line = readline(">");
+		add(&g_tools.garbage, line);
 		if (!line || !ft_strcmp(line, *value))
 			break ;
 		buff = ft_strjoin(buff, ft_strjoin(line, "\n"));

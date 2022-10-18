@@ -6,16 +6,16 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 23:42:25 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/12 15:46:02 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/18 22:49:52 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
- 
- int	expand_val_sign(char **set_value)
- {
-	 if (!check_env_value(*set_value))
-	 {
+
+int	expand_val_sign(char **set_value)
+{
+	if (!check_env_value(*set_value))
+	{
 		*set_value = ft_strdup(get_value_of_env(*set_value));
 		return (1);
 	}
@@ -26,22 +26,22 @@
 	else
 		*set_value = "\0";
 	return (0);
- }
+}
 
- void	ft_wildcard(char **value)
- {
+void	ft_wildcard(char **value)
+{
 	DIR				*dir;
 	char			*buff;
+	struct dirent	*dp;
 
 	buff = ft_strdup("");
-	struct dirent	*dp;
 	dir = opendir(ft_cwd());
 	if (dir != NULL)
 	{
 		dp = readdir(dir);
 		while (dp)
 		{
-			if (!ft_strcmp(dp->d_name, ".") || !ft_strcmp(dp->d_name , ".."))
+			if (!ft_strcmp(dp->d_name, ".") || !ft_strcmp(dp->d_name, ".."))
 				dp = readdir(dir);
 			else
 				buff = ft_strjoin(buff, ft_strjoin(dp->d_name, " "));
@@ -50,20 +50,19 @@
 	}
 	*value = buff;
 	closedir(dir);
- }
+}
 
-void  expand_data(t_token *token)
+void	expand_data(t_token *token)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	tmp = token;
-
 	while (tmp)
 	{
 		if (tmp->type == SIGN)
 			expand_val_sign(&tmp->val);
 		if (tmp->type == EXIT_STATUS)
-			  tmp->val = ft_itoa(g_tools.status_sign);
+			tmp->val = ft_itoa(g_tools.status_sign);
 		if (tmp->type == WORD)
 		{
 			if (tmp->val[0] == '~' && tmp->val[1] == '\0')
@@ -75,5 +74,4 @@ void  expand_data(t_token *token)
 		}
 		tmp = tmp->next;
 	}
-	
 }

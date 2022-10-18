@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../include/minishell.h"
+#include "../include/minishell.h"
 
-void to_lower(char **str)
+void	to_lower(char **str)
 {
 	int	i;
 
@@ -22,7 +22,6 @@ void to_lower(char **str)
 		if ((*str)[i] >= 'A' && (*str)[i] <= 'Z')
 			(*str)[i] = ft_tolower((*str)[i]);
 	}
-	
 }
 
 t_cmd	*new_cmnd(t_red *red, char **cmnd)

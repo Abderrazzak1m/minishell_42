@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exuc_commond.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 17:23:06 by amiski            #+#    #+#             */
-/*   Updated: 2022/10/16 14:46:49 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/17 21:43:54 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	ft_check_is_builtin(char **cmnd)
 		return (ft_exit(++cmnd), 1);
 	if (!ft_strncmp(*cmnd, "unset", ft_strlen(*cmnd)))
 		return (ft_unset(++cmnd), 1);
-	to_lower(&cmnd[0]); 
+	to_lower(&cmnd[0]);
 	if (!ft_strncmp(*cmnd, "echo", ft_strlen(*cmnd)))
 		return (ft_echo(++cmnd), 1);
 	if (!ft_strncmp(*cmnd, "cd", ft_strlen(*cmnd)))
@@ -98,7 +98,10 @@ int	run_cmd(t_cmd *cmd, t_env *env)
 	}
 	pid = fork();
 	if (pid < 0)
+	{
+		// printf msg error here
 		return (0);
+	}
 	if (pid == 0)
 	{
 		signal(SIGQUIT, SIG_DFL);
@@ -141,7 +144,7 @@ void	ft_exuc_command(t_cmd *cmd, t_token *token, t_env *env)
 		}
 		else
 			dup2(fd[1], 1);
-			dup2(fd[0], 0);
+		dup2(fd[0], 0);
 		cmd = cmd->next;
 	}
 	close(fd[1]);

@@ -6,7 +6,7 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 17:06:28 by amiski            #+#    #+#             */
-/*   Updated: 2022/10/15 22:18:19 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/17 21:39:46 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,7 @@ int	reset_io(t_cmd *cmd)
 	tmp[0] = red_input(cmd->red);
 	tmp[1] = red_output(cmd->red);
 	if (tmp[0] == -1 || tmp[1] == -1)
-	{
-			printf("hhhhhh\n");
-			return (0);
-	}
+		return (0);
 	else
 	{
 		if (cmd->next)
