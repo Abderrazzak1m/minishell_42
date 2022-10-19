@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 23:05:53 by amiski            #+#    #+#             */
-/*   Updated: 2022/10/17 09:25:43 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/18 23:36:25 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,7 @@ int	is_sc(char *line, t_token **tokens)
 		return (2);
 	}
 	else if (line[i] == '?')
-	{
-		append(tokens, new_token("?", EXIT_STATUS));
-		return (2);
-	}
+		return (append(tokens, new_token("?", EXIT_STATUS)), 2);
 	else if (ft_strchr(SC, line[i]))
 	{
 		buff = malloc(sizeof(char) * 2);
@@ -70,7 +67,7 @@ int	is_sign(char *line, t_token **tokens)
 	i = 0;
 	if (line[i++] == '$')
 	{
-		if (ft_strchr(SC_S, line[i]) || ft_isdigit(line[i]) ||
+		if (ft_strchr(SC_S, line[i]) || ft_isdigit(line[i]) || \
 			line[i] == '?' || ft_strchr(SC, line[i]) || line[i] == '\'')
 			return (is_sc(&line[i], tokens));
 		else

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:11:21 by amiski            #+#    #+#             */
-/*   Updated: 2022/10/17 09:27:33 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/18 23:23:43 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 #include "../include/minishell.h"
+
 static int	len_debut(char const *set, char const *s1)
 {
 	int	i;

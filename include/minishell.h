@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoelhaim <yoelhaim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 20:38:52 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/17 09:18:23 by yoelhaim         ###   ########.fr       */
+/*   Updated: 2022/10/19 01:33:14 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@
 # include <dirent.h>
 # include <unistd.h>
 # include "../libft/libft.h"
-# define NAME "minishell :"
+# define NAME "minishell: "
 # define ERR_PIPE "syntax error near unexpected token `|'"
 # define ERR_FILE "syntax error near unexpected token `'"
+# define ERR_FORK "fork: Resource temporarily unavailable"
 
 # define S_QUOT '\''
 # define D_QUOT '"'
@@ -61,9 +62,9 @@ typedef struct s_node_free
 typedef struct s_globals
 {
 	t_node_free	*garbage;
-	t_env	*g_env;
-	int		status_sign;
-	int		shlvl;
+	t_env		*g_env;
+	int			status_sign;
+	int			shlvl;
 }	t_globals;
 
 extern t_globals	g_tools;
@@ -160,8 +161,9 @@ int		put_error(t_red *red);
 void	signal_wait(void);
 void	print_error(int type, char *str);
 void	ft_handl_error(char *s1, char *s2, char *s3, int status);
-void to_lower(char **str);
+void	to_lower(char **str);
 // garbage collercor
 void	add(t_node_free **garbage, void *pointer);
 void	free_all(t_node_free *garbage);
+char	**get_d_env(void);
 #endif

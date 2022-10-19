@@ -6,7 +6,7 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:05:11 by amiski            #+#    #+#             */
-/*   Updated: 2022/10/14 16:05:37 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/19 01:12:29 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ int	put_error(t_red *red)
 		else if (access(red->f_name, R_OK))
 			ft_handl_error("minishell: ", \
 				red->f_name, " : Permission denied", 1);
-		else if (red->type == -4 || red->type == -5)
-		{
-			if (access(red->f_name, W_OK))
-				ft_handl_error("minishell: ", red->f_name, \
-				" : Permission denied", 1);
-		}
+	}
+	else if (red->type == -4 || red->type == -5)
+	{
+		if (access(red->f_name, W_OK))
+			ft_handl_error("minishell: ", red->f_name, \
+			" : Permission denied", 1);
 	}
 	return (-1);
 }

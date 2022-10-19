@@ -6,7 +6,7 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 17:23:06 by amiski            #+#    #+#             */
-/*   Updated: 2022/10/17 21:43:54 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/19 01:32:40 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,16 @@ char	**get_path(t_env *env)
 	return (NULL);
 }
 
-char	**get_d_env(void)
-{
-	t_env	*tmp;
-	char	*buff;
-
-	tmp = g_tools.g_env;
-	buff = ft_strdup("");
-	while (tmp)
-	{
-		buff = ft_strjoin(buff, ft_strjoin(tmp->value, "\t"));
-		tmp = tmp->next;
-	}
-	return (ft_split(buff, '\t'));
-}
-
 int	is_executable(char **path, t_cmd *cmd)
 {
 	char	*str;
 
+	if (ft_strchr(cmd->cmnd[0], '/'))
+	{
+		if (execve(cmd->cmnd[0], cmd->cmnd, get_d_env()) == -1)
+			print_error(1, cmd->cmnd[0]);
+		return (0);
+	}
 	str = ft_strjoin("/", cmd->cmnd[0]);
 	while (*path)
 	{
@@ -98,23 +89,16 @@ int	run_cmd(t_cmd *cmd, t_env *env)
 	}
 	pid = fork();
 	if (pid < 0)
-	{
-		// printf msg error here
-		return (0);
-	}
+		return (ft_handl_error(NAME, ERR_FORK, "", 1), 0);
 	if (pid == 0)
 	{
 		signal(SIGQUIT, SIG_DFL);
 		signal(SIGINT, SIG_DFL);
 		path = get_path(env);
-		if (ft_strchr(cmd->cmnd[0], '/'))
-			if (execve(cmd->cmnd[0], cmd->cmnd, get_d_env()) == -1)
-				print_error(1, cmd->cmnd[0]);
 		if (!is_executable(path, cmd))
 			print_error(0, cmd->cmnd[0]);
 		else
 			g_tools.status_sign = 0;
-		return (1);
 	}
 	else
 		signal(SIGINT, SIG_IGN);
@@ -134,19 +118,16 @@ void	ft_exuc_command(t_cmd *cmd, t_token *token, t_env *env)
 		{
 			if (run_cmd(cmd, env) == 0)
 			{
-				dup2(fd[1], 1);
-				dup2(fd[0], 0);
 				close(cmd->pipe[0]);
 				break ;
 			}
-			dup2(fd[1], 1);
-			dup2(fd[0], 0);
 		}
-		else
-			dup2(fd[1], 1);
+		dup2(fd[1], 1);
 		dup2(fd[0], 0);
 		cmd = cmd->next;
 	}
+	dup2(fd[1], 1);
+	dup2(fd[0], 0);
 	close(fd[1]);
 	close(fd[0]);
 	signal_wait();
