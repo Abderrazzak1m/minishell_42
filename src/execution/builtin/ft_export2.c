@@ -6,7 +6,7 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:14:41 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/18 22:41:28 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/20 09:47:02 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,16 @@ int	check_error_export(char *str)
 	smb = ft_strdup("@#!~_)(+*&^%01234567890");
 	smb2 = ft_strdup("@#!~_)(*&^%");
 	str = *ft_split(str, '=');
+	if (!str)
+		return (0);
 	while (smb[i])
 	{
 		if (smb[i] == str[0])
-			return (ft_putendl_fd("error ", 2), 0);
+			return (ft_handl_error(NAME, ft_strjoin("export: ", "s") \
+			, ": not a valid identifier", 1), 0);
 		if (smb2[i] == str[ft_strlen(str) - 1])
-			return (ft_putendl_fd("error w", 2), 0);
+			return (ft_handl_error(NAME, ft_strjoin("export: ", "s") \
+			, ": not a valid identifier", 1), 0);
 		i++;
 	}
 	return (1);
@@ -107,19 +111,15 @@ void	add_new_env(char **str)
 			str++;
 			continue ;
 		}
+		if (!str)
+			return ;
 		var = ft_split(*str, '=')[0];
 		if (var[ft_strlen(var) - 1] == '+')
 		{
 			var = ft_substr(var, 0, ft_strlen(var) - 1);
 			stt = 1;
 		}
-		if (check_env_value(var))
-		{
-			ft_unset(ft_split(var, ' '));
-			new_value_in_env(*str, stt);
-		}
-		else
-			update_in_env(*str, stt);
+		next_export(var, *str, stt);
 		stt = 0;
 		str++;
 	}

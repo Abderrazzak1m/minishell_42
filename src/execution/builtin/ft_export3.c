@@ -6,11 +6,22 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:09:37 by amiski            #+#    #+#             */
-/*   Updated: 2022/10/14 13:10:14 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/19 13:55:24 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
+
+void	next_export(char *var, char *str, int stt)
+{
+	if (check_env_value(var))
+	{
+		ft_unset(ft_split(var, ' '));
+		new_value_in_env(str, stt);
+	}
+	else
+		update_in_env(str, stt);
+}
 
 void	get_env(void)
 {

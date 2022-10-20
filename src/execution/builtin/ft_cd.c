@@ -6,7 +6,7 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:41:26 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/18 22:45:21 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/19 14:09:40 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ void	ft_update_pwd(char *old)
 	status++;
 }
 
+void	src_next(char *cmd, char *old)
+{
+	if (chdir(cmd) == -1)
+		perror("");
+	ft_update_pwd(old);
+}
+
 void	ft_cd(char **cmd)
 {
 	char	*old;
@@ -67,17 +74,13 @@ void	ft_cd(char **cmd)
 		cmd++;
 		if (*cmd[0] == '.' && cmd[0][1] == '\0')
 		{
-			if (!ft_cwd())
-				perror("error");
+			if (errno == 2)
+				ft_handl_error("cd: ", ERR_CD1, ERR_CD2, 0);
 			return ;
 		}
 		else if (*cmd[0] == '-' && cmd[0][1] == '\0')
 			ft_switch();
 		else
-		{
-			if (chdir(*cmd) == -1)
-				perror("");
-			ft_update_pwd(old);
-		}
+			src_next(*cmd, old);
 	}
 }

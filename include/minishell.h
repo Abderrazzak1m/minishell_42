@@ -6,7 +6,7 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 20:38:52 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/19 01:33:14 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/19 14:12:58 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define ERR_PIPE "syntax error near unexpected token `|'"
 # define ERR_FILE "syntax error near unexpected token `'"
 # define ERR_FORK "fork: Resource temporarily unavailable"
+# define ERR_CD1 "error retrieving current directory: getcwd: "
+# define ERR_CD2 "cannot access parent directories: No such file or directory"
 
 # define S_QUOT '\''
 # define D_QUOT '"'
@@ -156,6 +158,7 @@ void	new_value_in_env(char *str, int type);
 void	update_exit_value_env(char *var, char *value);
 int		check_env_value(char *var);
 void	get_env(void);
+void	next_export(char *var, char *str, int stt);
 //error
 int		put_error(t_red *red);
 void	signal_wait(void);

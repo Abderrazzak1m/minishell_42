@@ -6,7 +6,7 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 09:10:23 by amiski            #+#    #+#             */
-/*   Updated: 2022/10/18 23:30:49 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/19 14:21:08 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,8 @@ static char	**ft_malloc(char **str, char const *s, char c, int n)
 		{
 			str[i] = (char *)malloc((k + 1) * sizeof(char));
 			add(&g_tools.garbage, str[i]);
-			if (str[i] == NULL)
-				return (ft_errormal(str, i));
-			i++;
+			if (str[i++] == NULL)
+				return (ft_errormal(str, --i));
 		}
 		j++;
 	}
