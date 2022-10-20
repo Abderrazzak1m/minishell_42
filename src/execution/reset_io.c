@@ -6,7 +6,7 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 17:06:28 by amiski            #+#    #+#             */
-/*   Updated: 2022/10/19 01:22:01 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/20 11:44:42 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	red_input(t_red *red)
 				fd = open(red->f_name, O_RDONLY, 777);
 				if (fd < 0)
 					return (put_error(red));
+				unlink(red->f_name);
 			}
 		}
 		red = red->next;

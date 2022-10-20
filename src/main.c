@@ -6,7 +6,7 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 20:43:26 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/18 23:33:17 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/20 12:40:51 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ int	ft_lexer(char *line, t_token **tokens)
 		return (0);
 	}
 	ft_open_herdoc(*tokens);
+	if (g_tools.exither)
+	{
+		g_tools.exither = 0;
+		clean_tokens(tokens);
+		return (0);
+	}
 	expand_data(*tokens);
 	return (1);
 }

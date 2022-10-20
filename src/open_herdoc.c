@@ -6,7 +6,7 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:32:39 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/19 14:35:26 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/20 11:47:13 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,15 @@ void	opning_line(char **value, int *type)
 	static int	id;
 	char		*filename;
 
+	g_tools.exither = 0;
+	signal(SIGINT, handler_c_herd);
+	rl_event_hook = event;
 	buff = ft_strdup("");
 	while (1)
 	{
 		line = readline(">");
 		add(&g_tools.garbage, line);
-		if (!line || !ft_strcmp(line, *value))
+		if (!line || !ft_strcmp(line, *value) || g_tools.exither)
 			break ;
 		buff = ft_strjoin(buff, ft_strjoin(line, "\n"));
 	}

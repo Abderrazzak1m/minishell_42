@@ -6,7 +6,7 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 20:38:52 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/19 14:12:58 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/20 11:51:53 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_globals
 	t_env		*g_env;
 	int			status_sign;
 	int			shlvl;
+	int			exither;
 }	t_globals;
 
 extern t_globals	g_tools;
@@ -169,4 +170,6 @@ void	to_lower(char **str);
 void	add(t_node_free **garbage, void *pointer);
 void	free_all(t_node_free *garbage);
 char	**get_d_env(void);
+void	handler_c_herd(int sig);
+int		event(void);
 #endif
