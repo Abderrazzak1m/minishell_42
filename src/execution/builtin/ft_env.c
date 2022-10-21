@@ -6,7 +6,7 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 00:07:08 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/20 12:13:11 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/20 20:32:27 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	handler_c_herd(int sig)
 
 int	event(void)
 {
-	return (0);
+	return (16);
 }

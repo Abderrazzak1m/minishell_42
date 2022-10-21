@@ -6,7 +6,7 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:32:39 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/20 11:47:13 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/21 01:11:32 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,10 @@ void	opning_line(char **value, int *type)
 	static int	id;
 	char		*filename;
 
-	g_tools.exither = 0;
 	signal(SIGINT, handler_c_herd);
 	rl_event_hook = event;
 	buff = ft_strdup("");
-	while (1)
+	while (1 && !g_tools.exither)
 	{
 		line = readline(">");
 		add(&g_tools.garbage, line);
@@ -84,10 +83,10 @@ void	edit_signs(char **value, int type, t_token *token)
 				buff = ft_strjoin(buff, ft_strjoin("", tmp->val));
 			else if (tmp->type == SIGN || tmp->type == EXIT_STATUS)
 				buff = ft_strjoin(buff, ft_strjoin("$", tmp->val));
-			if (tmp->next && tmp->next->type != WSPACE)
+			if (tmp && tmp->type != WSPACE)
 			{
-				tmp->next->val = "\t";
-				tmp->next->type = WSPACE;
+				tmp->val = "\t";
+				tmp->type = WSPACE;
 			}
 			if (tmp->next == NULL)
 				break ;

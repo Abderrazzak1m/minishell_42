@@ -6,7 +6,7 @@
 /*   By: amiski <amiski@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 23:42:25 by yoelhaim          #+#    #+#             */
-/*   Updated: 2022/10/18 22:49:52 by amiski           ###   ########.fr       */
+/*   Updated: 2022/10/20 19:45:00 by amiski           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,6 @@ int	expand_val_sign(char **set_value)
 	return (0);
 }
 
-void	ft_wildcard(char **value)
-{
-	DIR				*dir;
-	char			*buff;
-	struct dirent	*dp;
-
-	buff = ft_strdup("");
-	dir = opendir(ft_cwd());
-	if (dir != NULL)
-	{
-		dp = readdir(dir);
-		while (dp)
-		{
-			if (!ft_strcmp(dp->d_name, ".") || !ft_strcmp(dp->d_name, ".."))
-				dp = readdir(dir);
-			else
-				buff = ft_strjoin(buff, ft_strjoin(dp->d_name, " "));
-			dp = readdir(dir);
-		}
-	}
-	*value = buff;
-	closedir(dir);
-}
-
 void	expand_data(t_token *token)
 {
 	t_token	*tmp;
@@ -69,8 +45,6 @@ void	expand_data(t_token *token)
 				tmp->val = ft_strdup(getenv("HOME"));
 			if (tmp->val[0] == '~' && tmp->val[1] == '/' && tmp->val[2] == '\0')
 				tmp->val = ft_strdup(ft_strjoin(getenv("HOME"), "/"));
-			if (tmp->val[0] == '*' && tmp->val[1] == '\0')
-				ft_wildcard(&tmp->val);
 		}
 		tmp = tmp->next;
 	}
